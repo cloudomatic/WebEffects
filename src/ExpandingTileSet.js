@@ -34,14 +34,13 @@ export default function ExpandingTileSet() {
   ]
 
   return (
-    <>
+    <div style={{height: "25em", border: "0px solid black"}}>
         {/*
         <div style={{ paddingBottom: '140vh' }}>scroll to element...{isOnScreen ? "true" : "False"}</div>
         */}
-        <div ref={elementRef}>{isOnScreen}</div>
         {
           isOnScreen && 
-            <div style={{ display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
+            <div style={{ backgroundColor: "white", display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
 							{tiles.map((tile, index) => (
 								<div key={index} style={{paddingLeft: "5%"}}>
 									<ExpandingTile 
@@ -56,7 +55,8 @@ export default function ExpandingTileSet() {
 							))}
 					</div>
         }
-    </>
+        <div ref={elementRef}>{isOnScreen}</div>
+    </div>
   );
 
 }

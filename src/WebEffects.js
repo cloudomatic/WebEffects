@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-//import AppBarLite from './AppBarLite'
+import AppBarLite from './AppBarLite'
 import EmptyComponent from './EmptyComponent'
 import Text from "./Text.js";
 import ExpandingTileSet from "./ExpandingTileSet.js";
@@ -8,12 +8,12 @@ import SpinningNumbers from "./SpinningNumbers.js";
 import SiteFooter from './SiteFooter.js';
 import Masthead from './Masthead.js';
 import WhatWeDo from './WhatWeDo.js';
-import AppBarLite from './AppBarLite.js';
-
+import UpcomingEvents from './UpcomingEvents.js';
 
 export default function HostManager() {
 
-  document.body.style.backgroundColor=window.getTheme().componentAreaBackgroundColor
+  document.body.style.backgroundColor="white"
+//window.getTheme().componentAreaBackgroundColor
 
   const styles = {
     rowDiv : {
@@ -22,12 +22,11 @@ export default function HostManager() {
   }
 
   return (
+        
     <>
-          <div id="div-app-bar">
-          </div>
-          <div style={styles.rowDiv}>
-            <Masthead />
-          </div>
+      
+          <AppBarLite />
+          <div id="app-bar-spacer" style={{height: "0.0em"}} />
           <div style={styles.rowDiv}>
             <WhatWeDo />
           </div>
@@ -37,6 +36,10 @@ export default function HostManager() {
           <div style={styles.rowDiv}>
             <ExpandingTileSet />
           </div>
+          <div style={styles.rowDiv}>
+            <UpcomingEvents />
+          </div>
+ 
           <div style={styles.rowDiv}>
             <SiteFooter />
           </div>
