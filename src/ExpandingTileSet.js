@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Text from "./Text.js";
-import ROI from "./ROI.js";
 import ExpandingTile from "./ExpandingTile.js";
 import useOnScreen from "./useOnScreen.js";
 import { useRef } from 'react';

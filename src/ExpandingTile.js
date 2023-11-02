@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Text from './Text';
-import ROI from './ROI';
 
 export default function ExpandingTile({image = "/refinery2.png", title="Refining the refinery: Machine learning for sustainable production", logo="hawaii.png", caption="foobar", renderingDelay=1000}) {
 
