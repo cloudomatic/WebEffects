@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Text from './Text';
 
-export default function ExpandingTile({image = "/refinery2.png", title="Refining the refinery: Machine learning for sustainable production", logo="hawaii.png", caption="foobar", renderingDelay=1000}) {
+export default function ExpandingTile({image = "/refinery2.png", title="Refining the refinery: Machine learning for sustainable production", logo="hawaii.png", caption="foobar", renderingDelay=1000, hidden=false}) {
 
   const [expanded, setExpanded] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
@@ -54,13 +54,6 @@ export default function ExpandingTile({image = "/refinery2.png", title="Refining
   // Implement delayed rendering for effect
   //
   React.useEffect(() => {
-/*
-    function handleResize() {
-      setWindowDimensions(window.getWindowDimensions());
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-*/
   	const timer = setInterval(() => {
 				if (!visible) setVisible(true)
 	  }, renderingDelay);

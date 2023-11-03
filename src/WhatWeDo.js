@@ -28,9 +28,8 @@ export default function WhatWeDo() {
         <div style={{
           display: "flex", 
           padding: "4.0em 0 0 0", 
-          _background: "linear-gradient(to top, rgba(31,50,83,0) 0%, rgba(13,14,68,0.65) 100%)", 
           minHeight: "23em",
-          background: "linear-gradient(to bottom, rgba(2,0,36,1) 0%, rgba(0,0,38,1) 32%, rgba(0,212,255,1) 100%)"
+          backgroundColor: "white"
          }}>
           <div style={{backgroundImage: showImage ? "url(quant_computer.png)" : null, height: "20em", margin: "0em 0em 0em 20%", border: "0px solid black", width: "20em", backgroundSize: "contain"}}>
             <div style={{padding: "0.5em 0 0 10em", whiteSpace: "nowrap"}}>

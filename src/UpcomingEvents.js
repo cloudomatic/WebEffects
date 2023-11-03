@@ -4,7 +4,7 @@ import ExpandingTile from "./ExpandingTile.js";
 import useOnScreen from "./useOnScreen.js";
 import { useRef } from 'react';
 
-export default function UpcomingEvents() {
+export default function UpcomingEvents({date, location, description, image}) {
 
   const elementRef = useRef(null);
   const isOnScreen = useOnScreen(elementRef);
@@ -14,22 +14,21 @@ export default function UpcomingEvents() {
         <div ref={elementRef}>{isOnScreen}</div>
         {
           isOnScreen && 
-            <div style={{ margin: "auto", maxWidth: "50%", backgroundColor: window.getTheme().fileManagerIconColor, display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
+            <div style={{ margin: "auto", padding: "1.0em 0 1.0em 0", width: "100%", minHeight: "10em", backgroundColor: window.getTheme().fileManagerIconColor, display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
               <div>
-                <img src="ai_summit.webp" style={{height: "10.0em"}} />
+                <img src={image} style={{height: "11.2em", padding: "none", margin: "auto"}} />
               </div>
-              <div style={{height: "9.9em", padding: "0 0 0 2.0em"}} >
+              <div style={{height: "100%", padding: "0 0 0 2.0em"}} >
                 <div style={{padding: "1.0em 0 0 1.0em", maxWidth: "20em"}}>
 									<Text color="white" fontWeight="bold" fontSize="1.4em">
-										November 1st-2nd, 2023
+										{date}
 									</Text><br/>
                   <Text color="white" fontWeight="bold" fontSize="1.0em">
-                    Bletchley Park, London, UK
+                    {location}
                   </Text><br/>
                   <Text color="white" fontSize="0.8em" lineHeight="0.9">
-                    Visit the Drager booth at 1-G4 to learn about the Deep Space Kernel and how Drager is bringing next-generation deep learning to clients arond the globe
+                    {description}
                   </Text>
-
                 </div>
               </div>
   					</div>

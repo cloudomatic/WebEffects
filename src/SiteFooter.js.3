@@ -1,0 +1,101 @@
+import * as React from 'react';
+import Text from "./Text.js";
+import ImageWithBottomLabel from "./ImageWithBottomLabel.js";
+
+const siteMap = [
+  [
+    {
+      "Products & Solutions" : {
+        "Deep Space Kernel": "",
+        "ML Plus": "",
+        "Whitepapers": "",
+        "Consulting": ""
+    }}
+  ]
+  ,
+  [
+    {
+			"Learn About" : {
+				"What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
+				"What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
+				"What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
+			}
+    }, {
+			"About Us": {
+				"Board": "",
+				"Executive Leadership": ""
+			}
+    }
+  ]
+]
+
+siteMap.map((column, index) => {
+  console.log()
+  column.map((category, index) => {
+    console.log("Category: " + Object.keys(category)[0])
+    Object.keys(category[Object.keys(category)[0]]).map((topic, t_index) => (
+      console.log("Topic: " + topic)
+    ))
+  })
+})
+
+export default function SiteFooter() {
+
+  const styles = {
+    root: {
+      padding: "1.5em 0 0 2.9em", display: "flex", backgroundColor: "rgb(26,24,31)", minHeight: "15em",  display: "flex", flexWrap: "wrap",  justifyContent: "left", alignItems: "start" 
+    },
+    columnBox: {
+      width: "25%", padding: "1.0em 2.0em 0 0"
+    },
+    categoryBox: {
+      padding: "0 0 2.0em 0"
+    },
+    categoryNameBox: {
+      padding: "0em 0 0.5em 0",
+      fontSize: "1.1em"
+    },
+    topicBox: {
+      padding: "0.2em 0 0.5em 2.0em", cursor: "pointer", 
+      fontSize: "0.9em"
+    }
+  }
+
+  return (
+        <div style={styles.root}>
+          <ImageWithBottomLabel
+            imageRef="logo.png"
+            label="Drager AI"
+            margin="0.9em 3.0em 0 0"
+          />
+          {
+            siteMap.map((column, index) => (
+							<div key={index} id="column-2" style={styles.columnBox}>
+								<Text color="white">
+									{
+										column.map((category, cat_index) => (
+											<div id="category-div" key={cat_index} style={styles.categoryBox}>
+												<div id={cat_index + "-category-name"} style={styles.categoryNameBox}>
+													<Text color="white" fontWeight="bold" fontSize={styles.categoryNameBox.fontSize} style={{paddingBottom: "0.6em"}}>{Object.keys(category)[0]}</Text>
+												</div>
+												{
+													Object.keys(category[Object.keys(category)[0]]).map( (topic, t_index) => (
+														<div key={t_index} style={styles.topicBox}>
+															<Text color="white" fontSize={styles.topicBox.fontSize}>
+																{topic}
+															</Text>
+														</div>
+                          ))
+												}
+											</div>
+										))
+									}
+								</Text>
+							</div>
+            ))
+          }
+        </div>
+  );
+
+
+}

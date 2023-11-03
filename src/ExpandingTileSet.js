@@ -4,7 +4,7 @@ import ExpandingTile from "./ExpandingTile.js";
 import useOnScreen from "./useOnScreen.js";
 import { useRef } from 'react';
 
-export default function ExpandingTileSet() {
+export default function ExpandingTileSet({mobile = false}) {
 
   const elementRef = useRef(null);
   const isOnScreen = useOnScreen(elementRef);
@@ -34,16 +34,19 @@ export default function ExpandingTileSet() {
   ]
 
   return (
-    <div style={{height: "25em", border: "0px solid black"}}>
-        {/*
-        <div style={{ paddingBottom: '140vh' }}>scroll to element...{isOnScreen ? "true" : "False"}</div>
-        */}
+    <>
+    <div style={{padding: "0 0 0 5.0em"}}>
+      <Text fontSize="1.5em" fontWeight="bold">
+      </Text>
+    </div>
+    <div style={{minHeight: "25em", border: "0px solid black"}}>
         {
-          isOnScreen && 
+          (isOnScreen || mobile) && 
             <div style={{ backgroundColor: "white", display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
 							{tiles.map((tile, index) => (
-								<div key={index} style={{paddingLeft: "5%"}}>
+								<div key={index} style={{minHeight: "20em", padding: "5% 0 0 5%"}}>
 									<ExpandingTile 
+                    hidden = {!isOnScreen}
 										image = {tile.image}
 										title = {tile.title}
 										caption = {tile.caption}
@@ -55,8 +58,9 @@ export default function ExpandingTileSet() {
 							))}
 					</div>
         }
-        <div ref={elementRef}>{isOnScreen}</div>
     </div>
+    <div ref={elementRef}>{isOnScreen}</div>
+    </>
   );
 
 }

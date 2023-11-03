@@ -18,7 +18,7 @@ run_development_container() {
       -e ADMIN_PASSWORD=admin \
       -e OFFLINE_MODE=false \
       -e SERVER_IMPLEMENTATION=${server_implementation} \
-      alpine:latest sh -c 'apk update && apk add bash && cd /src && ./build setup_development_container && cd /src && ./build start_development_container_services && echo "Connect to http://localhost:3000 to run the desktop, or run \"./build test_dev_container\" to validate the UI server" && sh'
+      alpine:latest sh -c 'apk update && apk add bash && cd /src && ./builder setup_development_container && cd /src && ./builder start_development_container_services && echo "Connect to http://localhost:3000 to run the desktop, or run \"./builder test_dev_container\" to validate the UI server" && sh'
 }
 
 
@@ -57,11 +57,11 @@ help() {
   echo ""
   echo "Usage: "
   echo ""
-  echo "  build <command>"
+  echo "  $0 <command>"
   echo ""
   echo "Suggestion: "
   echo ""
-  echo "  ./build run_development_container"
+  echo "  $0 run_development_container"
   echo ""
   echo "Commands:"
   echo ""
