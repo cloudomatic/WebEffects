@@ -41,7 +41,7 @@ export default function ExpandingTileSet({mobile = false}) {
     </div>
     <div style={{minHeight: "25em", border: "0px solid black"}}>
         {
-          (isOnScreen || mobile) && 
+          (true || isOnScreen || mobile) && 
             <div style={{ backgroundColor: "white", display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
 							{tiles.map((tile, index) => (
 								<div key={index} style={{minHeight: "20em", padding: "5% 0 0 5%"}}>

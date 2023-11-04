@@ -4,7 +4,7 @@ import Text from './Text';
 export default function ExpandingTile({image = "/refinery2.png", title="Refining the refinery: Machine learning for sustainable production", logo="hawaii.png", caption="foobar", renderingDelay=1000, hidden=false}) {
 
   const [expanded, setExpanded] = React.useState(false)
-  const [visible, setVisible] = React.useState(false)
+  const [visible, setVisible] = React.useState(true)
   const [windowDimensions, setWindowDimensions] = React.useState(window.getWindowDimensions());
 
   // https://jsfiddle.net/ybktodLc/
@@ -60,8 +60,9 @@ export default function ExpandingTile({image = "/refinery2.png", title="Refining
 	  return () => clearInterval(timer);
   }, []);
 
-  if (!visible) return null
-  else return (
+  //if (!visible) return null
+  //else 
+  return (
     <div id="tileBorder" style={style.tileBorder} onMouseOut={() => {setExpanded(false)}} onMouseOver={() => {setExpanded(true)}}>
       <div id="topPhoto" style={style.topPhoto}>
         <div id="photoTextContainer" style={style.photoTextContainer}>

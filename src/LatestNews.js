@@ -3,7 +3,7 @@ import Text from "./Text.js";
 import Slide from '@mui/material/Slide';
 import Paper from '@mui/material/Paper';
 
-export default function LatestNews({mobile=false}) {
+export default function LatestNews({mobile=false, imageRef, headline, caption, buttonText}) {
 
   const timerBasis = Date.now()
   const [timerSeconds, setTimerSeconds] = React.useState(null)
@@ -26,7 +26,8 @@ export default function LatestNews({mobile=false}) {
   }, []);
 
   const getPadding = (multiplier) => { 
-    if (mobile == true) return multiplier * 0
+    //if (mobile == true) return multiplier * 0
+    if (mobile == true) return 1 
     else return multiplier * 5
   }
 
@@ -39,29 +40,29 @@ export default function LatestNews({mobile=false}) {
           minHeight: "23em",
           background: "linear-gradient(to bottom, rgba(2,0,36,1) 0%, rgba(0,0,38,1) 32%, rgba(0,212,255,1) 100%)"
          }}>
-          <div style={{backgroundImage: showImage ? "url(quant_computer.png)" : null, minHeight: "20em", margin: "0em 0em 0em " + getPadding(4) + "%", border: "0px solid black", width: getPadding(4) + "em", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}>
+          <div style={{backgroundImage: (!mobile && showImage) ? "url(" + imageRef + ")" : null, minHeight: "20em", margin: "0em 0em 2.0em " + getPadding(4) + "%", border: "0px solid black", width: getPadding(4) + "em", backgroundSize: "contain", backgroundRepeat: "no-repeat"}}>
             <div style={{padding: "0.5em 0 0 " + getPadding(2) + "em", whiteSpace: "nowrap", display: "flex", flexWrap: "wrap"}}>
-              <div id="div-headline" style={{padding: "1.5 0 0 " + getPadding(2) + "em"}}>
+              <div id="div-headline" style={{padding: "1.5 0 0 " + getPadding(2) + "em", whiteSpace: mobile ? "wrap" : "nowrap"}}>
                 { showHeadline && <Text color="white" fontSize="3.0em" fontWeight="bold">
-                                    Drager wins third R&D 100 award 
+                                    {headline}
                                   </Text>
                 }
               </div>
               {showButton && <>
               <div id="div-caption" style={{minWidth: "15em", padding: "2.0em 0 0 " + getPadding(3) + "em", whiteSpace: "wrap"}}>
                 <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-                  <Paper sx={{backgroundColor: 'transparent'}} elevation={0} variant="outlined">
+                  <Paper sx={{backgroundColor: 'transparent'}} elevation={0} variant="elevation">
 										<Text color="white" fontSize="0.9em" fontWeight="bold">
-											Drager's next-generation Deep Space Kernel was acknowledged with the 2023 R&D 100 Breakthrough Award for most innovative product
+											{caption}
 										</Text>
                   </Paper> 
                 </Slide>
               </div>
               <div id="div-button" style={{margin: "2em 0 0 " + getPadding(5) + "em", border: "2px solid white", padding: "0.5em",  width: "7em", cursor: "pointer"}}>
                 <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-                  <Paper sx={{backgroundColor: 'transparent'}} elevation={0} variant="outlined">
+                  <Paper sx={{backgroundColor: 'transparent'}} elevation={0} variant="elevation">
 										<Text color="white" fontSize="1.2em">
-											Read More >
+											{buttonText} &rsaquo;
 										</Text>
                   </Paper>
                 </Slide>

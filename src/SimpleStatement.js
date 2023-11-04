@@ -6,8 +6,6 @@ import { useRef } from 'react';
 
 export default function SimpleStatement({ statement = "Take the next step, fool!", summary = "Learn more about what Drager can do for you.  We own AI, and you're ready to move forward with us", buttonText = "Discover Draper"}) {
 
-
-
   const timerBasis = Date.now()
   const [showStatement, setShowStatement] = React.useState(false)
   const [showSummary, setShowSummary] = React.useState(false)
@@ -29,8 +27,8 @@ export default function SimpleStatement({ statement = "Take the next step, fool!
 
   return (
     <>
-            <div style={{width: "100%", height: "15.0em", backgroundColor: "rgb(244, 244, 244)"}}>
-              <div style={{height: "9.9em", padding: "2.0em 0 0 2.0em"}} >
+            <div style={{width: "100%", minHeight: "15.0em", backgroundColor: "rgb(244, 244, 244)", padding: "2.0em 0 1.0em 2.0em"}}>
+              <div style={{minHeight: "9.9em", padding: "0em 0 0 2.0em"}} >
                 { showStatement && <Text color="black" fontSize="2.7em">
                                      {statement}
                                    </Text> 
@@ -40,7 +38,7 @@ export default function SimpleStatement({ statement = "Take the next step, fool!
 										{summary}
 									</Text>
                 </div>
-                <div style={{border: "1px solid black", width: (buttonText.length * 0.58) + "em", margin: "1.0em 0 0 0.0em", padding: "0.4em 0.7em 0.5em 0.7em", cursor: "pointer"}}>
+                <div style={{border: "1px solid black", width: (buttonText.length * 0.58) + "em", margin: "1.0em 0 0em 0.0em", padding: "0.4em 0.7em 0.5em 0.7em", cursor: "pointer"}}>
 									<Text color="black">
 										{buttonText} <>&rsaquo;</>
 									</Text>

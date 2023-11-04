@@ -5,8 +5,8 @@ import Text from "./Text.js";
 import CountUp from 'react-countup';
 import SpinningNumberSurveyTile from "./SpinningNumberSurveyTile.js";
 
-// https://stackoverflow.com/questions/34507924/how-to-create-an-animated-counter-in-react-js
-const data = [
+
+const defaultData = [
   { value: 97, description: "of our clients had never previously used machine learning or deep learning in their organizations" },
   { value: 66, description: "of our model implementations use existing on-premise compute, with no additional capacity investment"},
   { value: 68, description: "of our clients say that they have a need for generative AI"},
@@ -15,8 +15,7 @@ const data = [
   { value: 66, description: "of our clients have used our platform for at least four years"}
 ]
 
-export default function SpinningNumbers() {
-
+export default function SpinningNumbers({data=defaultData}) {
 
   const timerBasis = Date.now()
   const [timerSeconds, setTimerSeconds] = React.useState(null)
@@ -34,18 +33,18 @@ export default function SpinningNumbers() {
   }, []);
 
   return (
-  <>
-   <div id="div-tile-file-view" style={{  display: "flex", flexWrap: "wrap", margin: "auto", maxWidth: "80em", backgroundColor: "white", justifyContent: "center", visibility: isOnScreen ? "visible" : "hidden"}}>
-     {
-       isOnScreen && data.map( (item, index) => (
-              <div key={index} style={{border: "0px solid black", marginTop: "0.0em", width: "20em", margin: "10px", textAlign: "left", padding: "0.4em 0 0.4em 0.8em"}}>
-                <SpinningNumberSurveyTile number={data[index].value}  description={item.description} />
-              </div>
-        ))
-      }
-    </div>
-    <div ref={elementRef}>{isOnScreen}</div>
-   </>
+    <>
+		 <div id="div-tile-file-view" style={{  display: "flex", flexWrap: "wrap", margin: "auto", maxWidth: "80em", backgroundColor: "white", justifyContent: "center", visibility: isOnScreen ? "visible" : "hidden"}}>
+			 {
+				 isOnScreen && data.map( (item, index) => (
+								<div key={index} style={{border: "0px solid black", marginTop: "0.0em", width: "20em", margin: "10px", textAlign: "left", padding: "0.4em 0 0.4em 0.8em"}}>
+									<SpinningNumberSurveyTile number={data[index].value}  description={item.description} />
+								</div>
+					))
+				}
+			</div>
+			<div ref={elementRef}>{isOnScreen}</div>
+    </>
   );
 
 }

@@ -3,33 +3,7 @@ import Text from "./Text.js";
 import ImageWithBottomLabel from "./ImageWithBottomLabel.js";
 import DocumentToC from "./DocumentToC.js";
 
-const siteMap = [
-  [
-    {
-      "Products & Solutions" : {
-        "Deep Space Kernel": "",
-        "ML Plus": "",
-        "Whitepapers": "",
-        "Consulting": ""
-    }}
-  ],
-  [
-    {
-			"Learn About" : {
-				"What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
-				"What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
-				"What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
-			}
-    }, {
-			"About Us": {
-				"Board": "",
-				"Executive Leadership": ""
-			}
-    }
-  ]
-]
-
-export default function SiteFooter() {
+export default function SiteFooter({companyName, companyLogo, siteMap=[]}) {
 
   const styles = {
     root: {
@@ -41,8 +15,8 @@ export default function SiteFooter() {
         <div style={styles.root}>
           <div style={{marginBottom: "2.0em"}}>
 						<ImageWithBottomLabel
-							imageRef="logo.png"
-							label="Drager AI"
+							imageRef={companyLogo}
+							label={companyName}
 							margin="0.9em 3.0em 0 0"
 						/>
           </div>

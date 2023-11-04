@@ -7,11 +7,10 @@ import { useRef } from 'react';
 export default function UpcomingEvents({date, location, description, image}) {
 
   const elementRef = useRef(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = true; //useOnScreen(elementRef);
 
   return (
     <>
-        <div ref={elementRef}>{isOnScreen}</div>
         {
           isOnScreen && 
             <div style={{ margin: "auto", padding: "1.0em 0 1.0em 0", width: "100%", minHeight: "10em", backgroundColor: window.getTheme().fileManagerIconColor, display: "flex", flexWrap: "wrap",  justifyContent: "center", alignItems: "center", textAlign: "center"}}>
@@ -33,6 +32,7 @@ export default function UpcomingEvents({date, location, description, image}) {
               </div>
   					</div>
         }
+        <div ref={elementRef}>{isOnScreen}</div>
     </>
   );
 
