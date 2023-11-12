@@ -4,8 +4,12 @@ import ExpandingTile from "./ExpandingTile.js";
 import useOnScreen from "./useOnScreen.js";
 import { useRef } from 'react';
 
-export default function UpcomingEvents({date, location, description, image}) {
+export default function UpcomingEvents({content}) {
 
+  const date = content.date
+  const location = content.location
+  const description = content.description
+  const image = content.image
   const elementRef = useRef(null);
   const isOnScreen = true; //useOnScreen(elementRef);
 

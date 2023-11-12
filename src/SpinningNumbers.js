@@ -15,7 +15,7 @@ const defaultData = [
   { value: 66, description: "of our clients have used our platform for at least four years"}
 ]
 
-export default function SpinningNumbers({data=defaultData}) {
+export default function SpinningNumbers({content=defaultData}) {
 
   const timerBasis = Date.now()
   const [timerSeconds, setTimerSeconds] = React.useState(null)
@@ -36,9 +36,9 @@ export default function SpinningNumbers({data=defaultData}) {
     <>
 		 <div id="div-tile-file-view" style={{  display: "flex", flexWrap: "wrap", margin: "auto", maxWidth: "80em", backgroundColor: "white", justifyContent: "center", visibility: isOnScreen ? "visible" : "hidden"}}>
 			 {
-				 isOnScreen && data.map( (item, index) => (
+				 isOnScreen && content.map( (item, index) => (
 								<div key={index} style={{border: "0px solid black", marginTop: "0.0em", width: "20em", margin: "10px", textAlign: "left", padding: "0.4em 0 0.4em 0.8em"}}>
-									<SpinningNumberSurveyTile number={data[index].value}  description={item.description} />
+									<SpinningNumberSurveyTile number={content[index].value}  description={item.description} />
 								</div>
 					))
 				}

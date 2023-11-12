@@ -3,7 +3,7 @@ import Text from "./Text.js";
 import ImageWithBottomLabel from "./ImageWithBottomLabel.js";
 import DocumentToC from "./DocumentToC.js";
 
-export default function SiteFooter({companyName, companyLogo, siteMap=[]}) {
+export default function SiteFooter({content}) {
 
   const styles = {
     root: {
@@ -15,15 +15,15 @@ export default function SiteFooter({companyName, companyLogo, siteMap=[]}) {
         <div style={styles.root}>
           <div style={{marginBottom: "2.0em"}}>
 						<ImageWithBottomLabel
-							imageRef={companyLogo}
-							label={companyName}
+							imageRef={window.getContent()["companyLogo"]}
+							label={window.getContent()["companyName"]}
 							margin="0.9em 3.0em 0 0"
 						/>
           </div>
           <div id="spacer" style={{width: "5.0em"}} />
           <div>
             <DocumentToC 
-              toc={siteMap} 
+              toc={window.getContent()["siteMap"]} 
             />
           </div>
           <div>

@@ -12,6 +12,8 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import SettingsIcon from '@mui/icons-material/Settings';
+import WebIcon from '@mui/icons-material/Web';
+import MobileScreenShareIcon from '@mui/icons-material/MobileScreenShare';
 
 export default function Icon({name = "Terminal", transform = "scale(1.0)", color = window.getDrawerIconColor()}) {
 
@@ -33,5 +35,7 @@ export default function Icon({name = "Terminal", transform = "scale(1.0)", color
     else if (name.includes("List")) return <FormatListBulletedIcon sx={menuIconStyle} />
     else if (name.includes("Settings")) return <SettingsIcon sx={menuIconStyle} />
     else if (name.includes("Profile")) return <AccountCircleIcon sx={menuIconStyle} />
+    else if (name.includes("WebIcon")) return <WebIcon sx={menuIconStyle} />
+    else if (name.includes("MobileScreenShareIcon")) return <MobileScreenShareIcon sx={menuIconStyle} />
 	  else return <StorageIcon sx={menuIconStyle} />
 }

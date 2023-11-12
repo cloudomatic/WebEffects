@@ -11,7 +11,7 @@ export default function DocumentToCColumn({column}) {
     <div style={{border: "0px solid black"}}>
       {
         column.map((category, cat_index) => (
-          <div style={{marginBottom: style.heightBetweenCategories}}>
+          <div key={cat_index} style={{marginBottom: style.heightBetweenCategories}}>
 						<Text color="white" fontSize="1.4em" fontWeight="bold">
 							{Object.keys(category)[0]}
 						</Text>

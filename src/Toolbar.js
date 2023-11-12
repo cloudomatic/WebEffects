@@ -6,6 +6,11 @@ import Text from './Text';
 //
 // A component that shows two sets of icons, pushed to the far left and right of a top window bar
 //
+
+/*
+Re-do with this
+*/
+
 export default function Toolbar(leftSideElements, rightSideElements, padding) {
 
   const styles = {

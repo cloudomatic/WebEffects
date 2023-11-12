@@ -41,7 +41,10 @@ const fakeMenuItemImplementations = [
     }
 ]
 
-export default function MenuPanel({menuItems=fakeMenuItems, menuItemDescriptions=fakeMenuItemImplementations}) {
+export default function MenuPanel({content}) {
+
+  const menuItems = content.menuItems
+  const menuItemDescriptions = content.menuItemDescriptions
 
   var menuItemImplementations = [...menuItemDescriptions]
 
