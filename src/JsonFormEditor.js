@@ -11,12 +11,9 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
 
 /*
   // TEST!
-  const originalJson = window.convertFlatObjectBackToJsonObject(flattenedJsonObject, 0, 0, {"lineNumber": 0})
+  const originalJson = window.convertFlatObjectBackToJsonObject(flattenedJsonObject, {}, 0, {"lineNumber": 0})
   debugger
   */
-
-
-
 
   const [view, setView] = React.useState(defaultView)
 
@@ -150,7 +147,7 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
         var _flattenedJsonObject = JSON.parse(JSON.stringify(flattenedJsonObject))
         _flattenedJsonObject[key]["value"] = "" + event.target.value
       } 
-      onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, 0, 0, {lineNumber: 0}))
+      onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0}))
    }
 
    return (
@@ -312,7 +309,7 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
           var _flattenedJsonObject = JSON.parse(JSON.stringify(flattenedJsonObject))
           _flattenedJsonObject[key]["value"] = "" + value
         }
-        onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, 0, 0, {lineNumber: 0}))
+        onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0}))
     }
 
     return (

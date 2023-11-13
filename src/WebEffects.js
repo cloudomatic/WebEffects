@@ -14,22 +14,11 @@ import MenuPanel from './MenuPanel.js';
 
 export default function WebEffects() {
 
-  window.testConvertJsonObjectToFlatObject()
-  debugger
-
-
   document.body.style.backgroundColor="white"
   const [windowDimensions, setWindowDimensions] = React.useState(window.getWindowDimensions());
   const [mode, setMode] = React.useState("site"); // "cms" = content management system
   const [viewportWidth, setViewportWidth] = React.useState("100%")
   const [mobile, setMobile] = React.useState(false)
-
-  const styles = {
-    rowDiv : {
-      backgroundColor: "white",
-      margin: "0 0 2.0em 0"
-    }
-  }
 
   React.useEffect(() => {
     function handleResize() {
@@ -67,15 +56,15 @@ export default function WebEffects() {
   }
 
   const componentResolver = (name, content) => {
-    if (name == "LatestNews") return <LatestNewsEnhanced mobile={mobile} content={content} />
-    else if (name == "MenuPanel")  return <MenuPanel mobile={mobile} content={content} />
-    else if (name == "Spacer") return <div id="Spacer" style={{backgroundColor: "white", height: "2.0em"}} />
-    else if (name == "SpinningNumbers") return <SpinningNumbers mobile={mobile} content={content} />
-    else if (name == "UpcomingEvents") return <UpcomingEvents mobile={mobile} content={content} />
-    else if (name == "ExpandingTileSet") return <ExpandingTileSet mobile={mobile} content={content} />
-    else if (name == "SimpleStatement") return <SimpleStatement mobile={mobile} content={content} />
-    else if (name == "SimpleStatementStandalone") return <SimpleStatementStandalone mobile={mobile} content={content} />
-    else if (name == "SiteFooter") return <SiteFooter mobile={mobile} content={content} />
+    if (name === "LatestNews") return <LatestNewsEnhanced mobile={mobile} content={content} />
+    else if (name === "MenuPanel")  return <MenuPanel mobile={mobile} content={content} />
+    else if (name === "Spacer") return <div id="Spacer" style={{backgroundColor: "white", height: "2.0em"}} />
+    else if (name === "SpinningNumbers") return <SpinningNumbers mobile={mobile} content={content} />
+    else if (name === "UpcomingEvents") return <UpcomingEvents mobile={mobile} content={content} />
+    else if (name === "ExpandingTileSet") return <ExpandingTileSet mobile={mobile} content={content} />
+    else if (name === "SimpleStatement") return <SimpleStatement mobile={mobile} content={content} />
+    else if (name === "SimpleStatementStandalone") return <SimpleStatementStandalone mobile={mobile} content={content} />
+    else if (name === "SiteFooter") return <SiteFooter mobile={mobile} content={content} />
     return <div>Unknown Panel</div>
   }
 
@@ -91,10 +80,10 @@ export default function WebEffects() {
           )
         }
         {
-          mode == "site" && (
+          mode === "site" && (
             <div style={{backgroundColor: "white", width: viewportWidth}}>
               { 
-                window.getContent()["panels"].map((panel,index) => {
+                window.getContent()["panels"] !== undefined && window.getContent()["panels"].map((panel,index) => {
                   return <React.Fragment key={index}>
                     {componentResolver(panel["component"], panel.hasOwnProperty("content") && panel["content"])}
                   </React.Fragment>

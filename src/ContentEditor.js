@@ -5,13 +5,13 @@ import Text from './Text';
 export default function ContentEditor() {
 
 
-  const json = window.getContent()
+  const [content, setContent]  = React.useState(window.getContent())
 
   window.scrollTo(0, 0);
 
   const contentChanged = (content) => {
-    debugger
-    //window.storeContent(content)
+    window.storeContent(content)
+    setContent(content)
   }
 
   return (
@@ -25,7 +25,7 @@ export default function ContentEditor() {
         </div>
         <div id="empty-root-div" style={{ height: "50em", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
           <div style={{width: "75%", height: "70vh", margin: "2.0em 0 0 0" }}>
-              <JsonFormEditor json={json} onChangeCallback={contentChanged} defaultView="table" />
+              <JsonFormEditor json={content} onChangeCallback={contentChanged} defaultView="table" />
             </div>
         </div>
     </div>

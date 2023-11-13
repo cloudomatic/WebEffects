@@ -1,39 +1,12 @@
-function getSampleStarterContent() {
-  return {
-    "siteMap" : [
-        [
-          {
-            "Products & Solutions" : {
-              "Deep Space Kernel": ""
-          }}
-        ],
-        [
-          {
-            "Learn About" : {
-              "What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
-              "What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
-              "What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
-            }
-          }, {
-            "About Us": {
-              "Board": "",
-              "Executive Leadership": ""
-            }
-          }
-        ]
-      ],
-      "companyName": "Drager AI",
-      "companyLogo": "logo.png",
-      "panels": [
-        {
-          "component": "LatestNews_",
-          "content": {}
-        },{}
-      ]
-  }
-}
-
 function _getSampleStarterContent() {
+    return { 
+        "companyName": "Drager AI",
+         "companyLogo": "logo.png"
+         }}
+
+
+
+function getSampleStarterContent() {
   return { 
       "companyName": "Drager AI",
       "companyLogo": "logo.png",
@@ -267,15 +240,15 @@ function convertJsonObjectToFlatObject(jsonObject, flatObject, indentLevel) {
 
 
 
+
 //
 // Convert the form object data back to a JSON object
 //
-function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, globalLineNumber)  {
+function _convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, globalLineNumber)  {
     const addEnumerationsToKey = true
     var response = {}
     
     if (globalLineNumber.lineNumber == flatObject["lineNumber"]) {
-      debugger
     }
     
     //if (globalLineNumber.lineNumber == 10) debugger
@@ -284,6 +257,7 @@ function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, 
       if (globalLineNumber.lineNumber == 10) debugger
       if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) return response
       if (flatObject[globalLineNumber.lineNumber]["type"] == "object") {
+        debugger
         response[flatObject[globalLineNumber.lineNumber]["key"]] = {}
         //globalLineNumber.lineNumber++
         if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber + 1)) {
@@ -302,6 +276,7 @@ function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, 
           )
         }
       } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
+
         //debugger
         var arrayToBuild = []
         if (globalLineNumber.lineNumber == flatObject.lineNumber) {
@@ -315,14 +290,16 @@ function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, 
         const lengthOfArrayToBuild = flatObject[globalLineNumber.lineNumber]["length"]
         // Increment here
         //globalLineNumber.lineNumber++
+
         for (var i = 0; i < lengthOfArrayToBuild; i++) {
-          debugger
+          //debugger
           //  Check!!!!  Was this already done?
           //if (i == 0) 
           globalLineNumber.lineNumber++
           if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
             debugger  //!! Not needed?
-            //arrayToBuild.push({})
+            arrayToBuild.push({})
+            return arrayToBuild
           } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
             //debugger
             globalLineNumber.lineNumber++
@@ -375,58 +352,99 @@ function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, 
     return response
 }
 
+
+function convertFlatObjectBackToJsonObject(flatObject, jsonObject, indentLevel, globalLineNumber)  {
+  while (globalLineNumber.lineNumber < flatObject.lineNumber) {
+    if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
+      return
+    } else if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) {
+      return
+    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "string" || flatObject[globalLineNumber.lineNumber]["type"] == "number") {
+      if (Object.prototype.toString.call(jsonObject) === '[object Object]') {
+        jsonObject[flatObject[globalLineNumber.lineNumber]["key"]] = flatObject[globalLineNumber.lineNumber]["value"]
+      } else if (Object.prototype.toString.call(jsonObject) === '[object Array]') {
+        jsonObject.push(flatObject[globalLineNumber.lineNumber]["value"])
+      }
+      globalLineNumber.lineNumber++
+    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "object") {
+      const key = flatObject[globalLineNumber.lineNumber]["key"]
+      const currentIndentLevel = flatObject[globalLineNumber.lineNumber]["indentLevel"]
+      globalLineNumber.lineNumber++
+      if (Object.prototype.toString.call(jsonObject) === '[object Object]') {
+        var value = {} 
+        convertFlatObjectBackToJsonObject(
+              flatObject, 
+              value,
+              indentLevel + 1,
+              globalLineNumber
+        )
+        jsonObject[key] = value
+      } else if (Object.prototype.toString.call(jsonObject) === '[object Array]') {
+        var value = {}
+        convertFlatObjectBackToJsonObject(
+              flatObject,
+              value,
+              indentLevel + 1,
+              globalLineNumber
+        )
+        jsonObject.push(value)
+      }
+    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
+      const key = flatObject[globalLineNumber.lineNumber]["key"]
+      const currentIndentLevel = flatObject[globalLineNumber.lineNumber]["indentLevel"]
+      globalLineNumber.lineNumber++
+      if (Object.prototype.toString.call(jsonObject) === '[object Object]') {
+        var value = []
+        convertFlatObjectBackToJsonObject(
+              flatObject,
+              value,
+              indentLevel + 1,
+              globalLineNumber
+        )
+        jsonObject[key] = value
+      } else if (Object.prototype.toString.call(jsonObject) === '[object Array]') {
+        var value = []
+        convertFlatObjectBackToJsonObject(
+              flatObject,
+              value,
+              indentLevel + 1,
+              globalLineNumber
+        )
+        jsonObject.push(value)
+      }
+    } else {
+      // A type we've never encountered
+      debugger
+    }
+  } 
+  return jsonObject
+}
+
+
 function testConvertJsonObjectToFlatObject() {
   const object1 = {
-
-      "companyName": "Drager AI",
-      "companyLogo": "logo.png",
-
-      "panels": [
-        {
-          "component": "LatestNews_",
-          "content": {}
-        },{}
-      ]
-  }
-
-  const object2 = {
-    "siteMap" : [
-        [
-          {
-            "Products & Solutions" : {
-              "Deep Space Kernel": ""
-          }}
-        ],
-        [
-          {
-            "Learn About" : {
-              "What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
-              "What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
-              "What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
-            }
-          }, {
-            "About Us": {
-              "Board": "",
-              "Executive Leadership": ""
-            }
-          }
-        ]
-      ],
       "companyName": "Drager AI",
       "companyLogo": "logo.png",
       "panels": [
         {
           "component": "LatestNews_",
           "content": {}
-        },{}
+        }, {}
       ]
   }
 
   const testObjects = [
     {
+      "this": 1
+    },
+    {
       "this": "that",
-      "someArray": [],
-      "another": "setting"
+      "some": "thing",
+      "array": ["one", "two" ]
+    },
+    {
+      "this": { "is": "Sparta"},
+      "another": "thing"
     },
     {
       "this": "that",
@@ -441,21 +459,77 @@ function testConvertJsonObjectToFlatObject() {
       "another": "setting"
      },
      {
+      "biggerObject": {
+        "panels": [
+          {
+            "component": "LatestNews_",
+            "content": {}
+          }, {}
+        ]
+       },
        "biggerObjectArray": [ "", {}, {"some": "more"}]
-     }
+     }, {
+      "siteMap" : [
+          [
+            {
+              "Products & Solutions" : {
+                "Deep Space Kernel": ""
+            }}
+          ],
+          [
+            {
+              "Learn About" : {
+                "What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
+                "What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
+                "What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
+              }
+            }, {
+              "About Us": {
+                "Board": "",
+                "Executive Leadership": ""
+              }
+            }
+          ]
+        ],
+        "companyName": "Drager AI",
+        "companyLogo": "logo.png",
+        "panels": [
+          {
+            "component": "LatestNews_",
+            "content": {}
+          },{}
+        ]
+      },
+      {
+            "component": "SpinningNumbers",
+            "content": [
+              { value: 97, description: "of our clients had never previously used machine learning or deep learning in their organizations" },
+              { value: 66, description: "of our model implementations use existing on-premise compute, with no additional capacity investment"},
+              { value: 68, description: "of our clients say that they have a need for generative AI"},
+              { value: 48, description: "of CIOs surveyed said that they have already incorporated ML or DL software in their organizations"},
+              { value: 36, description: "of of our clients feel that they could be getting more from their data, if they had the right partner"},
+              { value: 66, description: "of our clients have used our platform for at least four years"}
+            ]
+       }
 
   ]
 
-  //"biggerObjectArray": [ "", {}, {"some": "more"}],
+
 
   for (var o in testObjects) {
-    //var obj = testObjects[1]
+    //var obj = testObjects[2]
     var obj = testObjects[o]
-    const originalJson = convertFlatObjectBackToJsonObject( convertJsonObjectToFlatObject(obj, {"lineNumber": 0}, 0), 0, 0, { lineNumber: 0 })
+    const originalJson = convertFlatObjectBackToJsonObject( convertJsonObjectToFlatObject(obj, {"lineNumber": 0}, 0), {}, 0, { lineNumber: 0 })
     if (JSON.stringify(originalJson) != JSON.stringify(JSON.parse(JSON.stringify(obj)))) {
-      debugger
+      console.log("Test failure")
+      console.log("---- original object ---")
+      console.log(JSON.stringify(obj), null, 2)
+      console.log("---- modified ----")
+      console.log(JSON.stringify(originalJson), null, 2)
+      console.log("---- modified ----")
       throw new Error("Unit test failed for object " + o)
     }
+    //debugger
   }
   debugger
 }
