@@ -1,15 +1,10 @@
 function getSampleStarterContent() {
   return {
-      "companyName": "Drager AI",
-      "companyLogo": "logo.png",
-      "siteMap" : [
+    "siteMap" : [
         [
           {
             "Products & Solutions" : {
-              "Deep Space Kernel": "",
-              "ML Plus": "",
-              "Whitepapers": "",
-              "Consulting": ""
+              "Deep Space Kernel": ""
           }}
         ],
         [
@@ -27,11 +22,13 @@ function getSampleStarterContent() {
           }
         ]
       ],
+      "companyName": "Drager AI",
+      "companyLogo": "logo.png",
       "panels": [
         {
           "component": "LatestNews_",
           "content": {}
-        }
+        },{}
       ]
   }
 }
@@ -67,8 +64,13 @@ function _getSampleStarterContent() {
       ],
       "panels": [
         { 
-          "component": "LatestNews_", 
-          "content": {}
+          "component": "LatestNews", 
+          "content": {
+                  "imageRef": "quant_computer.png",
+                  "headline": "Drager wins third R&D 100 award",
+                  "caption": "Drager's next-generation Deep Space Kernel was acknowledged with the 2023 R&D 100 Breakthrough Award for most innovative product",
+                  "buttonText": "Read More"
+          }
         },
         {
           "component": "MenuPanel",
@@ -194,6 +196,10 @@ function clearSavedContent() {
   localStorage.removeItem("siteContent")
 }
 
+function storeContent(content) {
+  localStorage.setItem("siteContent", JSON.stringify(content))
+}
+
 function getContent() {
   var storedContent = localStorage.getItem("siteContent")
   var content = {}
@@ -245,7 +251,8 @@ function convertJsonObjectToFlatObject(jsonObject, flatObject, indentLevel) {
         flatObject.lineNumber++
         convertJsonObjectToFlatObject(jsonObject[key], flatObject, indentLevel + 1)
       } else if (flatObject[flatObject.lineNumber]["type"] == "array") {
-        for (var i = 0; i < jsonObject[key].length; i++) {
+        if (jsonObject[key].length == 0) flatObject.lineNumber++
+        else for (var i = 0; i < jsonObject[key].length; i++) {
           if (i < 1) flatObject.lineNumber++
           var str = key.toString() + "[" + i.toString() + "]"
           convertJsonObjectToFlatObject({ [str]: jsonObject[key][i] }, flatObject, indentLevel + 1)
@@ -266,45 +273,97 @@ function convertJsonObjectToFlatObject(jsonObject, flatObject, indentLevel) {
 function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, globalLineNumber)  {
     const addEnumerationsToKey = true
     var response = {}
-    while (globalLineNumber.lineNumber !== flatObject["lineNumber"]) {
-      //if (globalLineNumber.lineNumber == 132) debugger
+    
+    if (globalLineNumber.lineNumber == flatObject["lineNumber"]) {
+      debugger
+    }
+    
+    //if (globalLineNumber.lineNumber == 10) debugger
+    while (globalLineNumber.lineNumber < flatObject["lineNumber"]) {
+      //debugger
+      if (globalLineNumber.lineNumber == 10) debugger
       if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) return response
-      if (flatObject[globalLineNumber.lineNumber]["type"] === "object") {
+      if (flatObject[globalLineNumber.lineNumber]["type"] == "object") {
         response[flatObject[globalLineNumber.lineNumber]["key"]] = {}
-        globalLineNumber.lineNumber++
-        response[flatObject[globalLineNumber.lineNumber - 1]["key"]] = convertFlatObjectBackToJsonObject(
-          flatObject,
-          globalLineNumber.lineNumber,
-          flatObject[globalLineNumber.lineNumber]["indentLevel"],
-          globalLineNumber
-        )
-      } else if (flatObject[globalLineNumber.lineNumber]["type"] === "array") {
+        //globalLineNumber.lineNumber++
+        if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber + 1)) {
+          //debugger
+          return response
+        } else if (flatObject[globalLineNumber.lineNumber + 1]["indentLevel"] < indentLevel) {
+          // empty object
+          return response
+        } else {
+          globalLineNumber.lineNumber++
+          response[flatObject[globalLineNumber.lineNumber - 1]["key"]] = convertFlatObjectBackToJsonObject(
+            flatObject,
+            globalLineNumber.lineNumber,
+            flatObject[globalLineNumber.lineNumber]["indentLevel"],
+            globalLineNumber
+          )
+        }
+      } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
+        //debugger
         var arrayToBuild = []
-        response[flatObject[globalLineNumber.lineNumber]["key"]] = arrayToBuild
-        var lengthOfArrayToBuild = flatObject[globalLineNumber.lineNumber]["length"]
+        if (globalLineNumber.lineNumber == flatObject.lineNumber) {
+          debugger
+        }
+        if (flatObject[globalLineNumber.lineNumber]["key"] === undefined) {
+          debugger
+        }
+        //response[flatObject[globalLineNumber.lineNumber]["key"]] = arrayToBuild
+        const keyNameOfArray = flatObject[globalLineNumber.lineNumber]["key"]
+        const lengthOfArrayToBuild = flatObject[globalLineNumber.lineNumber]["length"]
+        // Increment here
+        //globalLineNumber.lineNumber++
         for (var i = 0; i < lengthOfArrayToBuild; i++) {
-          if (i === 0) globalLineNumber.lineNumber++
-          if (flatObject[globalLineNumber.lineNumber] === undefined) {
-            debugger
-          }
-          if (flatObject[globalLineNumber.lineNumber]["type"] === "object") {
+          debugger
+          //  Check!!!!  Was this already done?
+          //if (i == 0) 
+          globalLineNumber.lineNumber++
+          if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
+            debugger  //!! Not needed?
+            //arrayToBuild.push({})
+          } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
+            //debugger
             globalLineNumber.lineNumber++
-            arrayToBuild.push(
-              convertFlatObjectBackToJsonObject(
-                flatObject,
-                globalLineNumber.lineNumber,
-                flatObject[globalLineNumber.lineNumber]["indentLevel"],
-                globalLineNumber
-              )
+            const arrayElement = convertFlatObjectBackToJsonObject(
+                  flatObject,
+                  globalLineNumber.lineNumber,
+                  flatObject[globalLineNumber.lineNumber]["indentLevel"],
+                  globalLineNumber
             )
+            //debugger
+            arrayToBuild.push(arrayElement[Object.keys(arrayElement)[0]])
+            //debugger
+          } else if (flatObject[globalLineNumber.lineNumber]["type"] === "object") {
+            //globalLineNumber.lineNumber++
+            if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
+              //debugger
+              arrayToBuild.push({})
+            } else {
+              //debugger
+              const arrayElement = convertFlatObjectBackToJsonObject(
+                  flatObject,
+                  globalLineNumber.lineNumber,
+                  flatObject[globalLineNumber.lineNumber]["indentLevel"],
+                  globalLineNumber
+              )
+              //debugger
+              arrayToBuild.push(arrayElement[Object.keys(arrayElement)[0]])
+            }
           } else {
             const itemToPush = flatObject[globalLineNumber.lineNumber]["value"]
+            if (itemToPush === undefined) debugger
             arrayToBuild.push(
               itemToPush
             )
-            globalLineNumber.lineNumber++
+            //globalLineNumber.lineNumber++
           }
         }
+        // push here?
+        response[keyNameOfArray] = arrayToBuild
+        globalLineNumber.lineNumber++
+        //debugger
       }
       else {
         if (addEnumerationsToKey && flatObject[globalLineNumber.lineNumber].hasOwnProperty("enum")) {
@@ -315,6 +374,92 @@ function convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, 
     }
     return response
 }
+
+function testConvertJsonObjectToFlatObject() {
+  const object1 = {
+
+      "companyName": "Drager AI",
+      "companyLogo": "logo.png",
+
+      "panels": [
+        {
+          "component": "LatestNews_",
+          "content": {}
+        },{}
+      ]
+  }
+
+  const object2 = {
+    "siteMap" : [
+        [
+          {
+            "Products & Solutions" : {
+              "Deep Space Kernel": ""
+          }}
+        ],
+        [
+          {
+            "Learn About" : {
+              "What is Hybrid Cloud": "https://www.ibm.com/topics/hybrid-cloud?lnk=fle",
+              "What is Artificial Intelligence?": "https://www.ibm.com/topics/artificial-intelligence?lnk=fle",
+              "What is Machine Learning?": "https://www.ibm.com/topics/machine-learning?lnk=fle"
+            }
+          }, {
+            "About Us": {
+              "Board": "",
+              "Executive Leadership": ""
+            }
+          }
+        ]
+      ],
+      "companyName": "Drager AI",
+      "companyLogo": "logo.png",
+      "panels": [
+        {
+          "component": "LatestNews_",
+          "content": {}
+        },{}
+      ]
+  }
+
+  const testObjects = [
+    {
+      "this": "that",
+      "someArray": [],
+      "another": "setting"
+    },
+    {
+      "this": "that",
+      "objectArray": [ {} ],
+      "emptyKey": { }
+    },
+    {
+      "this": "that",
+      "someArray": ["one"],
+      "anotherArray": ["one", "two"],
+      "objectArray": [ {} ],
+      "another": "setting"
+     },
+     {
+       "biggerObjectArray": [ "", {}, {"some": "more"}]
+     }
+
+  ]
+
+  //"biggerObjectArray": [ "", {}, {"some": "more"}],
+
+  for (var o in testObjects) {
+    //var obj = testObjects[1]
+    var obj = testObjects[o]
+    const originalJson = convertFlatObjectBackToJsonObject( convertJsonObjectToFlatObject(obj, {"lineNumber": 0}, 0), 0, 0, { lineNumber: 0 })
+    if (JSON.stringify(originalJson) != JSON.stringify(JSON.parse(JSON.stringify(obj)))) {
+      debugger
+      throw new Error("Unit test failed for object " + o)
+    }
+  }
+  debugger
+}
+
 
 
 function getTheme() {
@@ -384,4 +529,6 @@ function getWindowDimensions() {
   };
 }
 
-
+function unitTests() {
+  return 0
+}

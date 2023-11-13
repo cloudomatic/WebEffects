@@ -17,7 +17,7 @@ export default function SiteFooter({content}) {
 						<ImageWithBottomLabel
 							imageRef={window.getContent()["companyLogo"]}
 							label={window.getContent()["companyName"]}
-							margin="0.9em 3.0em 0 0"
+							margin="0.9em 0.0em 0 0"
 						/>
           </div>
           <div id="spacer" style={{width: "5.0em"}} />

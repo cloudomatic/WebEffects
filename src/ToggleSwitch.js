@@ -12,7 +12,7 @@ export default function ToggleSwitch({options = [1, 2, 3], defaultSelected = 1, 
     },
     option: {
       display: "table-cell",
-      width: "33%",
+      width: (100 / options.length) +  "%",
       padding: "0.3em",
       color: colors[2]
     }

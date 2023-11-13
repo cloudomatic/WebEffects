@@ -8,6 +8,16 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
 
   const flattenedJsonObject = window.convertJsonObjectToFlatObject(json, { "lineNumber": 0}, 0)
 
+
+/*
+  // TEST!
+  const originalJson = window.convertFlatObjectBackToJsonObject(flattenedJsonObject, 0, 0, {"lineNumber": 0})
+  debugger
+  */
+
+
+
+
   const [view, setView] = React.useState(defaultView)
 
   // A state variable to handle the "raw" view text buffer mid-edit, i.e. we only update the global JSON hook when
@@ -25,6 +35,33 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
       newPhrase += capitalizeWord(tokens[token]) + " "
     }
     return newPhrase.trim()
+  }
+
+  function debugView() {
+
+    const handleRawEditChange = (editedText) => {
+      setRawJsonTextBuffer(editedText)
+      try {
+        onChangeCallback(JSON.parse(editedText))
+      } catch (error) {
+      }
+    }
+
+    if (true) return (
+              <div id="raw-view" style={{border: "1px solid black", backgroundColor: "none", fontSize: "0.8em", height: "100%", width: "99.5%", padding: "0.0em"}}>
+                <div style={{height: "100%", width: "100%", backgroundColor: "none"}}>
+                  <pre style={{height: "100%", width: "100%"}}>
+                    <textarea id="raw-editor"
+                      type="text"
+                      value={JSON.stringify(flattenedJsonObject, null, 2)}
+                      placeholder=""
+                      onChange={(event) => handleRawEditChange(event.target.value)}
+                      style={{ paddingLeft: "0.4em", fontFamily: '"Roboto", "Helvetica", "Arial", "sans-serif"', fontSize: "0.9em", border: "none", height: "95%", width: "98%" }}
+                    />
+                  </pre>
+                </div>
+            </div>
+    )
   }
        
   function tableView() {
@@ -353,12 +390,15 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
     if (option.includes("table")) setView("table")
     if (option.includes("{ }")) setView("raw")
     if (option.includes("form")) setView("form")
+    if (option.includes("debug")) setView("debug")
   }
 
+  var toggleOptions = [ "{ }", "table", "<form>" ]
+  if (window.location.search.includes("debugJson")) toggleOptions.push("debug")
   return (
     <>
        <div style={{width: "99.5%", fontSize: "0.6em"}}>
-         <ToggleSwitch options = {[ "{ }", "table", "<form>" ]} defaultSelected={defaultView} onSelect={toggleView} />
+         <ToggleSwitch options = {toggleOptions} defaultSelected={defaultView} onSelect={toggleView} />
        </div>
        { view == "table" &&
          <div style={{ width: "100%", height: "100%", border: "0px solid black", backgroundColor: "none", overflow: "auto"}}>
@@ -370,6 +410,9 @@ export default function JsonFormEditor({json, defaultView="table", onChangeCallb
        }
        {
          view == "form" && formView()
+       }
+       {
+         view == "debug" && debugView()
        }
     </>
   )

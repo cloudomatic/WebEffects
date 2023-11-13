@@ -12,12 +12,12 @@ export default function DocumentToC({toc}) {
         <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
           {
             toc.map((column, index) => (
-              <>
-								<div key={"div-column-" + index} style={{border: "0px solid black"}}>
+              <React.Fragment key={"div-column-" + index}>
+								<div style={{border: "0px solid black"}}>
 									<DocumentToCColumn column={column} />
 								</div>
                 <div id="spacer" style={{ "width": style.widthBetweenColumns}} />
-              </>
+              </React.Fragment>
             ))
           }
         </div>

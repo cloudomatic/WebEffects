@@ -10,6 +10,7 @@ const fakeMenuItems = [
     { "id": "solutions", "label": "Solutions"},
 ]
 
+
 const fakeMenuItemImplementations = [
     {
        "id": "who",
@@ -50,6 +51,7 @@ export default function MenuPanel({content}) {
 
   const [selectedMenuItem, setSelectedMenuItem] = React.useState(1)
 
+
   const menuSelectionChanged = (id) => {
     for (var i in menuItemImplementations) { 
       if (menuItems[i].id == id) {
@@ -57,9 +59,12 @@ export default function MenuPanel({content}) {
         if (menuItemImplementations[i].element === undefined) menuItemImplementations[i].element = []
         if (menuItemImplementations[i].element.length = 0) menuItemImplementations[i].element.push(
           <SimpleStatement
-              statement={menuItemImplementations[i].title}
-              summary={menuItemImplementations[i].summary}
-              buttonText={menuItemImplementations[i].buttonText}
+            removeSpacers={true}
+            content={{
+              "statement": menuItemImplementations[i].title,
+              "summary": menuItemImplementations[i].summary,
+              "buttonText": menuItemImplementations[i].buttonText
+            }}
           />
         )
         return
@@ -68,22 +73,26 @@ export default function MenuPanel({content}) {
   }
 
   return (
-        <div style={{display: "flex", flexWrap: "wrap", margin: "0 0 0 0", padding: "1.0em 0 0.0em 0",  justifyContent: "center", backgroundColor: "rgb(244, 244, 244)"}}>
-          <div style={{marginRight: "5.0em", width: "10.0em"}}>
+    <div style={{width: "100%", display: "flex", flexWrap: "wrap", minHeight: "22.0em", backgroundColor: "rgb(244, 244, 244)", justifyContent: "center"}}>
+          <div id="item-1" style={{width: "20em", backgroundColor: "none"}}>
             <CoolMenu 
               selectionChangeCallback={menuSelectionChanged} 
               defaultSelected="what" 
               menuItems={menuItems}
             />
           </div>
-          <div>
-            <SimpleStatement 
-              statement={menuItemImplementations[selectedMenuItem].title}
-              summary={menuItemImplementations[selectedMenuItem].summary}
-              buttonText={menuItemImplementations[selectedMenuItem].buttonText}
+          <div id="item-1" style={{width: "35em", backgroundColor: "none"}}>
+            <SimpleStatement
+              removeSpacers={true}
+              content={{
+                "statement": menuItemImplementations[selectedMenuItem].title,
+                "summary": menuItemImplementations[selectedMenuItem].summary,
+                "buttonText": menuItemImplementations[selectedMenuItem].buttonText
+              }}
             />
           </div>
-        </div>
-  );
-
+    </div>
+  )
+  
+  return <div></div>
 }
