@@ -1,11 +1,3 @@
-function _getSampleStarterContent() {
-    return { 
-        "companyName": "Drager AI",
-         "companyLogo": "logo.png"
-         }}
-
-
-
 function getSampleStarterContent() {
   return { 
       "companyName": "Drager AI",
@@ -14,10 +6,10 @@ function getSampleStarterContent() {
         [
           {
             "Products & Solutions" : {
-              "Deep Space Kernel": "",
-              "ML Plus": "",
-              "Whitepapers": "",
-              "Consulting": ""
+              "Deep Space Kernel": "https://en.wikipedia.org/wiki/Kernel_method",
+              "ML Plus": "https://en.wikipedia.org/wiki/Machine_learning",
+              "Whitepapers": "https://en.wikipedia.org/wiki/White_paper",
+              "Consulting": "https://www.ibm.com/consulting"
           }}
         ],
         [
@@ -29,8 +21,8 @@ function getSampleStarterContent() {
             }
           }, {
             "About Us": {
-              "Board": "",
-              "Executive Leadership": ""
+              "Board": "https://groundlings.com/about/board-of-directors",
+              "Executive Leadership": "https://www.theonion.com/the-onion-is-the-world-s-leading-news-publication-offe-1819653457"
             }
           }
         ]
@@ -238,121 +230,6 @@ function convertJsonObjectToFlatObject(jsonObject, flatObject, indentLevel) {
     return flatObject
 }
 
-
-
-
-//
-// Convert the form object data back to a JSON object
-//
-function _convertFlatObjectBackToJsonObject(flatObject, lineNumber, indentLevel, globalLineNumber)  {
-    const addEnumerationsToKey = true
-    var response = {}
-    
-    if (globalLineNumber.lineNumber == flatObject["lineNumber"]) {
-    }
-    
-    //if (globalLineNumber.lineNumber == 10) debugger
-    while (globalLineNumber.lineNumber < flatObject["lineNumber"]) {
-      //debugger
-      if (globalLineNumber.lineNumber == 10) debugger
-      if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) return response
-      if (flatObject[globalLineNumber.lineNumber]["type"] == "object") {
-        debugger
-        response[flatObject[globalLineNumber.lineNumber]["key"]] = {}
-        //globalLineNumber.lineNumber++
-        if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber + 1)) {
-          //debugger
-          return response
-        } else if (flatObject[globalLineNumber.lineNumber + 1]["indentLevel"] < indentLevel) {
-          // empty object
-          return response
-        } else {
-          globalLineNumber.lineNumber++
-          response[flatObject[globalLineNumber.lineNumber - 1]["key"]] = convertFlatObjectBackToJsonObject(
-            flatObject,
-            globalLineNumber.lineNumber,
-            flatObject[globalLineNumber.lineNumber]["indentLevel"],
-            globalLineNumber
-          )
-        }
-      } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
-
-        //debugger
-        var arrayToBuild = []
-        if (globalLineNumber.lineNumber == flatObject.lineNumber) {
-          debugger
-        }
-        if (flatObject[globalLineNumber.lineNumber]["key"] === undefined) {
-          debugger
-        }
-        //response[flatObject[globalLineNumber.lineNumber]["key"]] = arrayToBuild
-        const keyNameOfArray = flatObject[globalLineNumber.lineNumber]["key"]
-        const lengthOfArrayToBuild = flatObject[globalLineNumber.lineNumber]["length"]
-        // Increment here
-        //globalLineNumber.lineNumber++
-
-        for (var i = 0; i < lengthOfArrayToBuild; i++) {
-          //debugger
-          //  Check!!!!  Was this already done?
-          //if (i == 0) 
-          globalLineNumber.lineNumber++
-          if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
-            debugger  //!! Not needed?
-            arrayToBuild.push({})
-            return arrayToBuild
-          } else if (flatObject[globalLineNumber.lineNumber]["type"] == "array") {
-            //debugger
-            globalLineNumber.lineNumber++
-            const arrayElement = convertFlatObjectBackToJsonObject(
-                  flatObject,
-                  globalLineNumber.lineNumber,
-                  flatObject[globalLineNumber.lineNumber]["indentLevel"],
-                  globalLineNumber
-            )
-            //debugger
-            arrayToBuild.push(arrayElement[Object.keys(arrayElement)[0]])
-            //debugger
-          } else if (flatObject[globalLineNumber.lineNumber]["type"] === "object") {
-            //globalLineNumber.lineNumber++
-            if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
-              //debugger
-              arrayToBuild.push({})
-            } else {
-              //debugger
-              const arrayElement = convertFlatObjectBackToJsonObject(
-                  flatObject,
-                  globalLineNumber.lineNumber,
-                  flatObject[globalLineNumber.lineNumber]["indentLevel"],
-                  globalLineNumber
-              )
-              //debugger
-              arrayToBuild.push(arrayElement[Object.keys(arrayElement)[0]])
-            }
-          } else {
-            const itemToPush = flatObject[globalLineNumber.lineNumber]["value"]
-            if (itemToPush === undefined) debugger
-            arrayToBuild.push(
-              itemToPush
-            )
-            //globalLineNumber.lineNumber++
-          }
-        }
-        // push here?
-        response[keyNameOfArray] = arrayToBuild
-        globalLineNumber.lineNumber++
-        //debugger
-      }
-      else {
-        if (addEnumerationsToKey && flatObject[globalLineNumber.lineNumber].hasOwnProperty("enum")) {
-          response[flatObject[globalLineNumber.lineNumber]["key"] + "::enum::" + flatObject[globalLineNumber.lineNumber]["enum"].join(":") ] = flatObject[globalLineNumber.lineNumber]["value"]
-        } else response[flatObject[globalLineNumber.lineNumber]["key"]] = flatObject[globalLineNumber.lineNumber]["value"]
-        globalLineNumber.lineNumber++
-      }
-    }
-    return response
-}
-
-
 function convertFlatObjectBackToJsonObject(flatObject, jsonObject, indentLevel, globalLineNumber)  {
   while (globalLineNumber.lineNumber < flatObject.lineNumber) {
     if (!flatObject.hasOwnProperty(globalLineNumber.lineNumber)) {
@@ -514,8 +391,6 @@ function testConvertJsonObjectToFlatObject() {
 
   ]
 
-
-
   for (var o in testObjects) {
     //var obj = testObjects[2]
     var obj = testObjects[o]
@@ -533,8 +408,6 @@ function testConvertJsonObjectToFlatObject() {
   }
   debugger
 }
-
-
 
 function getTheme() {
   if (localStorage.getItem("hostmanager.options.theme") == "dark") {

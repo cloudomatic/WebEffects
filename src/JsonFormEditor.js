@@ -4,7 +4,7 @@ import './JsonFormEditor.css';
 import ToggleSwitch from './ToggleSwitch.js';
 import Menu from './Menu.js';
 
-export default function JsonFormEditor({json, defaultView="table", size="small", onChangeCallback}) {
+export default function JsonFormEditor({json, defaultView="table", size="small", onChange}) {
 
   const flattenedJsonObject = window.convertJsonObjectToFlatObject(json, { "lineNumber": 0}, 0)
 
@@ -62,7 +62,8 @@ export default function JsonFormEditor({json, defaultView="table", size="small",
     const handleRawEditChange = (editedText) => {
       setRawJsonTextBuffer(editedText)
       try {
-        onChangeCallback(JSON.parse(editedText))
+        onChange(JSON.parse(editedText))
+        //kkk
       } catch (error) {
       }
     }
@@ -171,7 +172,9 @@ export default function JsonFormEditor({json, defaultView="table", size="small",
         var _flattenedJsonObject = JSON.parse(JSON.stringify(flattenedJsonObject))
         _flattenedJsonObject[key]["value"] = "" + event.target.value
       } 
-      onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0}))
+      const _jsonObject = window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0})
+      setRawJsonTextBuffer(JSON.stringify(_jsonObject, null, 2))
+      onChange(_jsonObject)
    }
 
    return (
@@ -240,7 +243,7 @@ export default function JsonFormEditor({json, defaultView="table", size="small",
     const handleRawEditChange = (editedText) => {
       setRawJsonTextBuffer(editedText)
       try {
-        onChangeCallback(JSON.parse(editedText))
+        onChange(JSON.parse(editedText))
       } catch (error) {
       }
     }
@@ -333,7 +336,9 @@ export default function JsonFormEditor({json, defaultView="table", size="small",
           var _flattenedJsonObject = JSON.parse(JSON.stringify(flattenedJsonObject))
           _flattenedJsonObject[key]["value"] = "" + value
         }
-        onChangeCallback(window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0}))
+        const _jsonObject = window.convertFlatObjectBackToJsonObject(_flattenedJsonObject, {}, 0, {lineNumber: 0})
+        setRawJsonTextBuffer(JSON.stringify(_jsonObject, null, 2))
+        onChange(_jsonObject)
     }
 
     return (

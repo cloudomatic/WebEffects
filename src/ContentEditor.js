@@ -25,7 +25,7 @@ export default function ContentEditor() {
         </div>
         <div id="empty-root-div" style={{ height: "50em", backgroundColor: "white", display: "flex", justifyContent: "center" }}>
           <div style={{width: "75%", height: "70vh", margin: "2.0em 0 0 0" }}>
-              <JsonFormEditor json={content} size="medium" onChangeCallback={contentChanged} defaultView="table" />
+              <JsonFormEditor json={content} size="medium" onChange={contentChanged} defaultView="table" />
             </div>
         </div>
     </div>
