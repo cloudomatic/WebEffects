@@ -7,7 +7,7 @@ export default function ToggleSwitch({options = [1, 2, 3], defaultSelected = 1, 
 
   const styles = {
     root: {
-      display: "table", height: "100%", width: "100%", backgroundColor: "lightGray", border: "1px solid black", borderBottom: "none",
+      display: "table", height: "100%", width: "99.9%", backgroundColor: "lightGray", border: "1px solid black", borderBottom: "none",
       cursor: "pointer"
     },
     option: {

@@ -7,14 +7,12 @@ import MastheadLogo from './MastheadLogo.js';
 import Menu from './Menu.js';
 import RadioPanel from './RadioPanel.js';
 
-// https://jsfiddle.net/yX3p9/7/
-
 export default function AppBarLite({companyName, companyLogo, setMode, setDeviceType, deviceOptions}) {
 
 
   const [deviceMenuOpen, setDeviceMenuOpen] = React.useState(false)
 
-  const defaultMobileSelection = "Browser"
+  const defaultMobileSelection = "Browser 100%"
 
   const handleSetDeviceType = (type) => {
     setDeviceType(type)
