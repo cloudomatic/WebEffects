@@ -12,6 +12,7 @@ export default function SimpleStatement({removeSpacers = false, content}) {
   const [showStatement, setShowStatement] = React.useState(false)
   const [showSummary, setShowSummary] = React.useState(false)
   const [showButton, setShowButton] = React.useState(false)
+  const [hoverOverButton, setHoverOverButton] = React.useState(false)
   const elementRef = useRef(null);
   const isOnScreen = useOnScreen(elementRef);
 
@@ -30,6 +31,24 @@ export default function SimpleStatement({removeSpacers = false, content}) {
     return () => clearInterval(timer);
   }, []);
 
+  const styles = {
+    root: {
+    },
+    statement: {
+    },
+    summary: {
+    },
+    button: {
+      _background: hoverOverButton ? "black" : "none",
+      _background: hoverOverButton ? "rgba(0,0,0,0.05)" : "none",
+      border: hoverOverButton ? "2px solid black" : "1px solid black", 
+      width: (content.buttonText.length * 0.58) + "em", margin: "1.0em 0 2.0em 0.0em", 
+      padding: "0.4em 0.7em 0.5em 0.7em", cursor: "pointer",
+      color: hoverOverButton ? "black" : "black",
+      fontWeight: hoverOverButton ? "bold" : "normal"
+    }
+
+  }
 
   return (
       <>
@@ -51,8 +70,8 @@ export default function SimpleStatement({removeSpacers = false, content}) {
                 }
                 {
                   showButton && 
-                    <div style={{border: "1px solid black", width: (content.buttonText.length * 0.58) + "em", margin: "1.0em 0 2.0em 0.0em", padding: "0.4em 0.7em 0.5em 0.7em", cursor: "pointer"}}>
-                      <Text color="black">
+                    <div style={styles.button} onMouseOver={() => setHoverOverButton(true)} onMouseOut={() => setHoverOverButton(false)} >
+                      <Text fontWeight={styles.button.fontWeight} color={styles.button.color}>
                         {content.buttonText} <>&rsaquo;</>
                       </Text>
                     </div>

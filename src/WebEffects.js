@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import AppBarLite from './AppBarLite'
+import AppBarLite from './AppBarLite';
+import ParallaxPanel from './ParallaxPanel';
 import ContentEditor from './ContentEditor';
 import ExpandingTileSet from "./ExpandingTileSet.js";
 import SpinningNumbers from "./SpinningNumbers.js";
@@ -57,6 +58,7 @@ export default function WebEffects() {
 
   const componentResolver = (name, content) => {
     if (name === "LatestNews") return <LatestNewsEnhanced mobile={mobile} content={content} />
+    else if (name === "ParallaxPanel") return <ParallaxPanel mobile={mobile} content={content} />
     else if (name === "MenuPanel")  return <MenuPanel mobile={mobile} content={content} />
     else if (name === "Spacer") return <div id="Spacer" style={{backgroundColor: "white", height: "2.0em"}} />
     else if (name === "SpinningNumbers") return <SpinningNumbers mobile={mobile} content={content} />

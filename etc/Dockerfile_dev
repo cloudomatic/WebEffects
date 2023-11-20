@@ -1,0 +1,7 @@
+FROM docker.io/alpine:latest
+
+RUN mkdir -p /src/server /src/ui && apk add bash
+ADD package.json /src/package.json
+ADD builder /src/builder
+RUN cd /src && ./builder setup_development_container
+

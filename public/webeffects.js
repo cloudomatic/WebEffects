@@ -101,6 +101,16 @@ function getSampleStarterContent() {
           }
         },
         {
+          "component": "ParallaxPanel",
+          "content": {
+                  "imageRef": "laptop-woman-shaded.png",
+                  "imageRefHover": "laptop-woman-not-shaded.png",
+                  "headline": "Drager is hiring",
+                  "caption": "You were never going to launch that startup anyway.  Give up on your dreams and come work for us doing soul-sucking work.",
+                  "buttonText": "View Opportunities"
+          }
+        },
+        {
           "component": "ExpandingTileSet",
           "content": {
             "tiles": [ 
@@ -236,7 +246,7 @@ function convertFlatObjectBackToJsonObject(flatObject, jsonObject, indentLevel, 
       return
     } else if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) {
       return
-    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "string" || flatObject[globalLineNumber.lineNumber]["type"] == "number") {
+    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "string" || flatObject[globalLineNumber.lineNumber]["type"] == "number" || flatObject[globalLineNumber.lineNumber]["type"] == "boolean") {
       if (Object.prototype.toString.call(jsonObject) === '[object Object]') {
         jsonObject[flatObject[globalLineNumber.lineNumber]["key"]] = flatObject[globalLineNumber.lineNumber]["value"]
       } else if (Object.prototype.toString.call(jsonObject) === '[object Array]') {

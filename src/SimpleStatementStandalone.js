@@ -10,6 +10,7 @@ export default function SimpleStatementStandalone({removeSpacers = false, conten
   const [showStatement, setShowStatement] = React.useState(false)
   const [showSummary, setShowSummary] = React.useState(false)
   const [showButton, setShowButton] = React.useState(false)
+  const [hoverOverButton, setHoverOverButton] = React.useState(false)
   const elementRef = useRef(null);
   const isOnScreen = useOnScreen(elementRef);
 
@@ -31,7 +32,7 @@ export default function SimpleStatementStandalone({removeSpacers = false, conten
 
   return (
       <>
-        <div style={{display: "flex", flexWrap: "wrap", minHeight: "15.0em", backgroundColor: "rgb(244, 244, 244)", justifyContent: "center"}}>
+        <div style={{display: "flex", flexWrap: "wrap", minHeight: "16.0em", backgroundColor: "rgb(244, 244, 244)", justifyContent: "center"}}>
           <div id="item-1" style={{backgroundColor: "none"}}>
             <div style={{backgroundColor: "rgb(244, 244, 244)", padding: "2.0em 1.0em 1.0em 1.0em"}}>
               <div style={{ minHeight: "9.9em", padding: "0em 0 0 2.0em", maxWidth: "40em"  }} >
@@ -50,8 +51,17 @@ export default function SimpleStatementStandalone({removeSpacers = false, conten
                 }
                 {
                   showButton && 
-                    <div style={{border: "1px solid black", width: (content.buttonText.length * 0.58) + "em", margin: "1.0em 0 2.0em 0.0em", padding: "0.4em 0.7em 0.5em 0.7em", cursor: "pointer"}}>
-                      <Text color="black">
+                    <div  onMouseOver={() => setHoverOverButton(true)} onMouseOut={() => setHoverOverButton(false)} style={
+                      {
+                        border: hoverOverButton ? "1px solid gray" : "1px solid black", 
+                        width: (content.buttonText.length * 0.58) + "em", 
+                        margin: "1.0em 0 2.0em 0.0em", 
+                        padding: "0.4em 0.7em 0.5em 0.7em", 
+                        cursor: "pointer",
+                        background: hoverOverButton ? "rgba(0,0,0,0.05)" : "none",
+                      }}
+                    >
+                      <Text color="black" fontWeight={hoverOverButton ? "bold" : "normal"}>
                         {content.buttonText} <>&rsaquo;</>
                       </Text>
                     </div>

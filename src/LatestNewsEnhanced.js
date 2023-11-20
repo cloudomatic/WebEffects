@@ -10,6 +10,7 @@ export default function LatestNews({mobile=false, content}) {
   const [showImage, setShowImage] = React.useState(false)
   const [showButton, setShowButton] = React.useState(false)
   const [showHeadline, setShowHeadline] = React.useState(false)
+  const [hoverOverButton, setHoverOverButton] = React.useState(false)
 
   //
   // Start a timer so we can show the numbers spinning
@@ -96,7 +97,18 @@ export default function LatestNews({mobile=false, content}) {
             showButton &&
                <Slide direction="up" in={true} mountOnEnter unmountOnExit>
                   <Paper sx={{backgroundColor: 'transparent'}} elevation={0} variant="elevation">
-                    <div id="div-button" style={{margin: "2em 0 0 0em", border: "2px solid " + styles.root.textColor, padding: "0.5em",  width: "7em", cursor: "pointer"}}>
+                    <div 
+                      id="div-button" style={
+                      {
+                        margin: "2em 0 0 0em", 
+                        border: hoverOverButton  ? "2px solid " + styles.root.textColor : "2px solid " + styles.root.textColor,
+                        padding: "0.5em",  
+                        width: "7em", 
+                        cursor: "pointer",
+                        background: hoverOverButton ? "rgba(0,0,0,0.25)" : "none",
+                      }} 
+                      onMouseOver={() => setHoverOverButton(true)} onMouseOut={() => setHoverOverButton(false)}
+                    >
                     <Text color={styles.root.textColor} fontSize="1.2em">
                       {content.buttonText} &rsaquo;
                     </Text>
