@@ -56,7 +56,7 @@ function getSampleStarterContent() {
               {
                  "id": "what",
                  "title": "We make deep learning accessible",
-                 "summary": "We have the products, the platform, the techniques, and the thought leadership to get you started in deep learning",
+                 "summary": "We have the products, the platform, the techniques, and the thought leadership to get you started in DL-based decision support",
                  "buttonText": "Discover Drager",
               },
               {
@@ -89,7 +89,39 @@ function getSampleStarterContent() {
           ]
         },
         {
-          "component": "Spacer"
+          "component": "SwimRace",
+          "content": {
+            "Jeilin.Wang" : {
+              position: "President & Board"
+            },
+            "Michelle.Caruthers" : {
+              position: "Board"
+            },
+            "April.Demolay": {
+              position: "CFO"
+            },
+            "Dowd.Rollinson": {
+              position: "Chairman"
+            },
+            "Richard.Scruggs": {
+              position: "CEO"
+            },
+            "Rod.Sterlington": {
+              position: "Board"
+            },
+            "Ivy.Bradford": {
+              position: "COO"
+            },
+            "Laila.Dickens": {
+              position: "General Counsel"
+            },
+            "Clifford.Long": {
+              position: "Board"
+            },
+            "Prince.Faisal.bin.Salam": {
+              position: "Board"
+            }
+          }
         },
         {
           "component": "UpcomingEvents",
@@ -98,6 +130,16 @@ function getSampleStarterContent() {
             "location": "Bletchley Park, London, UK",
             "description" : "Visit the Drager booth at 1-G4 to learn about the Deep Space Kernel and how Drager is bringing next-generation deep learning to clients arond the globe",
             "image": "ai_summit.webp"
+          }
+        },
+        {
+          "component": "FloatOverImagePanel",
+          "content": {
+                  "imageRef": "laptop-woman-shaded.png",
+                  "imageRefHover": "laptop-woman-not-shaded.png",
+                  "headline": "Drager is hiring",
+                  "caption": "You were never going to launch that startup anyway.  Give up on your dreams and come work for us doing soul-sucking work.",
+                  "buttonText": "View Opportunities"
           }
         },
         {
@@ -236,7 +278,7 @@ function convertFlatObjectBackToJsonObject(flatObject, jsonObject, indentLevel, 
       return
     } else if (flatObject[globalLineNumber.lineNumber]["indentLevel"] < indentLevel) {
       return
-    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "string" || flatObject[globalLineNumber.lineNumber]["type"] == "number") {
+    } else if (flatObject[globalLineNumber.lineNumber]["type"] == "string" || flatObject[globalLineNumber.lineNumber]["type"] == "number" || flatObject[globalLineNumber.lineNumber]["type"] == "boolean") {
       if (Object.prototype.toString.call(jsonObject) === '[object Object]') {
         jsonObject[flatObject[globalLineNumber.lineNumber]["key"]] = flatObject[globalLineNumber.lineNumber]["value"]
       } else if (Object.prototype.toString.call(jsonObject) === '[object Array]') {

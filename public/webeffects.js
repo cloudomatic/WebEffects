@@ -78,16 +78,6 @@ function getSampleStarterContent() {
           "component": "Spacer"
         },
         {
-          "component": "ParallaxPanel",
-          "content": {
-                  "imageRef": "laptop-woman-shaded.png",
-                  "imageRefHover": "laptop-woman-not-shaded.png",
-                  "headline": "Drager is hiring",
-                  "caption": "You were never going to launch that startup anyway.  Give up on your dreams and come work for us doing soul-sucking work.",
-                  "buttonText": "View Opportunities"
-          }
-        },
-        {
           "component": "SpinningNumbers",
           "content": [
             { value: 97, description: "of our clients had never previously used machine learning or deep learning in their organizations" },
@@ -99,7 +89,39 @@ function getSampleStarterContent() {
           ]
         },
         {
-          "component": "Spacer"
+          "component": "SwimRace",
+          "content": {
+            "Jeilin.Wang" : {
+              position: "President & Board"
+            },
+            "Michelle.Caruthers" : {
+              position: "Board"
+            },
+            "April.Demolay": {
+              position: "CFO"
+            },
+            "Dowd.Rollinson": {
+              position: "Chairman"
+            },
+            "Richard.Scruggs": {
+              position: "CEO"
+            },
+            "Rod.Sterlington": {
+              position: "Board"
+            },
+            "Ivy.Bradford": {
+              position: "COO"
+            },
+            "Laila.Dickens": {
+              position: "General Counsel"
+            },
+            "Clifford.Long": {
+              position: "Board"
+            },
+            "Prince.Faisal.bin.Salam": {
+              position: "Board"
+            }
+          }
         },
         {
           "component": "UpcomingEvents",

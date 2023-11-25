@@ -3,7 +3,7 @@ import * as React from 'react';
 import Text from './Text.js';
 import SwimRace from './SwimRace.js';
 
-export default function ParallaxPanel({content}) {
+export default function ParallaxPanel({content, mobile}) {
 
   const [hoverOverButton, setHoverOverButton] = React.useState(false)
   const [scrollHeight, setScrollHeight] = React.useState(0)
@@ -64,7 +64,7 @@ export default function ParallaxPanel({content}) {
 
   if (true) return (
     <div>
-      <SwimRace />
+      <SwimRace mobile={mobile} />
     </div>
   )
 

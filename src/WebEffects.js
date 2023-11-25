@@ -12,6 +12,7 @@ import UpcomingEvents from './UpcomingEvents.js';
 import SimpleStatement from './SimpleStatement.js';
 import SimpleStatementStandalone from './SimpleStatementStandalone.js';
 import MenuPanel from './MenuPanel.js';
+import SwimRace from './SwimRace.js';
 
 
 export default function WebEffects() {
@@ -59,6 +60,7 @@ export default function WebEffects() {
 
   const componentResolver = (name, content) => {
     if (name === "LatestNews") return <LatestNewsEnhanced mobile={mobile} content={content} />
+    else if (name === "SwimRace") return <SwimRace mobile={mobile} content={content} />
     else if (name === "ParallaxPanel") return <ParallaxPanel mobile={mobile} content={content} />
     else if (name === "FloatOverImagePanel") return <FloatOverImagePanel mobile={mobile} content={content} />
     else if (name === "MenuPanel")  return <MenuPanel mobile={mobile} content={content} />
