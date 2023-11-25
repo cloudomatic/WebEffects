@@ -52,7 +52,7 @@ run_offline_development_container() {
       -e ADMIN_USERNAME=admin \
       -e ADMIN_PASSWORD=admin \
       -e OFFLINE_MODE=true \
-      ${project_name}-develop:0.9 sh -c "cd /src && $0 start_development_container_services && sh"
+      ${project_name}-develop:0.9 sh -c "cd /src && rm -rf /src/node_modules && ln -s /node_modules /src/node_modules && $0 start_development_container_services && sh"
 }
 
 
@@ -66,7 +66,7 @@ start_development_container_services() {
   echo "The UI server log is available in ./ui/nohup.out"
   echo "Waiting for server to start (10 seconds)...."
   sleep 10
-  tail -f nohup.out
+  tail -f nohup.out &
   echo ""
 }
 

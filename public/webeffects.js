@@ -56,7 +56,7 @@ function getSampleStarterContent() {
               {
                  "id": "what",
                  "title": "We make deep learning accessible",
-                 "summary": "We have the products, the platform, the techniques, and the thought leadership to get you started in deep learning",
+                 "summary": "We have the products, the platform, the techniques, and the thought leadership to get you started in DL-based decision support",
                  "buttonText": "Discover Drager",
               },
               {
@@ -76,6 +76,16 @@ function getSampleStarterContent() {
         },
         { 
           "component": "Spacer"
+        },
+        {
+          "component": "ParallaxPanel",
+          "content": {
+                  "imageRef": "laptop-woman-shaded.png",
+                  "imageRefHover": "laptop-woman-not-shaded.png",
+                  "headline": "Drager is hiring",
+                  "caption": "You were never going to launch that startup anyway.  Give up on your dreams and come work for us doing soul-sucking work.",
+                  "buttonText": "View Opportunities"
+          }
         },
         {
           "component": "SpinningNumbers",
@@ -101,7 +111,7 @@ function getSampleStarterContent() {
           }
         },
         {
-          "component": "ParallaxPanel",
+          "component": "FloatOverImagePanel",
           "content": {
                   "imageRef": "laptop-woman-shaded.png",
                   "imageRefHover": "laptop-woman-not-shaded.png",
